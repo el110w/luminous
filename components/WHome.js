@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../wstyles.js';
 
 import StateContext from './StateContext.js';
-import WCameraPage from './WCameraPage.js';
+import WWebcam from './WWebcam.js';
 
 
 import frame00 from '../assets/images/Mframe_00.png';
@@ -44,52 +44,63 @@ export default function WHome(props){
 
 
     return (
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <View style={styles.homeContainer}>
             
             <SafeAreaView  style={styles.homeScreen}>
 
-            <WCameraPage></WCameraPage>
-       
-            
-            <View style={styles.textSection}>
-                <Text style={styles.pageTitle}>Welcome!</Text>
-                <View style={styles.textSpacer}></View>
-                <Text style={styles.infoText}>This app is a photobooth you can use on the go. Here's how it works:</Text>
-            
-                <Text style={styles.infoHeader}>1. Take your photos
-                </Text>
-                <Text style={styles.infoText}>Start the camera whenever you're ready! The camera will
-                   take 6 photos of you, each 8 seconds apart.
-                </Text>
-                
-                <Text style={styles.infoHeader}>2. Choose 4
-                </Text>
-                <Text style={styles.infoText}>Select which pictures you want to use in a 2x2 photo frame. 
-                </Text>
-                
-                <Text style={styles.infoHeader}>3. Personalize
-                </Text>
-                <Text style={styles.infoText}>Explore our collection of photobooth frames
-                    to decorate your photos with.
-                </Text>
-                
-                <Text style={styles.infoHeader}>5. Download
-                </Text>
-                <Text style={styles.infoText}>Save to your camera roll! Don't worry, this app is database-less so your photos are private to you!
-                </Text>
+            <View style={styles.webcamContainer}>
 
+                <WWebcam/>
+        
                 
+                <View style={styles.textSection}>
+                    <Text style={styles.pageTitle}>Welcome!</Text>
+                    <View style={styles.textSpacer}></View>
+                    <Text style={styles.infoText}>This app is a photobooth you can use on the go. Here's how it works:</Text>
+                
+                    <Text style={styles.infoHeader}>1. Take your photos
+                    </Text>
+                    <Text style={styles.infoText}>Start
+                        whenever you're ready to begin! Make sure you grant this website permission to 
+                        access your device's camera. 
+                    </Text>
+                    
+                    <Text style={styles.infoHeader}>2. Choose 4
+                    </Text>
+                    <Text style={styles.infoText}>Select which pictures you want to use in a 2x2 photo frame. 
+                    </Text>
+                    
+                    <Text style={styles.infoHeader}>3. Personalize
+                    </Text>
+                    <Text style={styles.infoText}>Explore our collection of photobooth frames
+                        to decorate your photos with.
+                    </Text>
+                    
+                    <Text style={styles.infoHeader}>5. Download
+                    </Text>
+                    <Text style={styles.infoText}>Save to your camera roll! Don't worry, this app is database-less so your photos are private to you!
+                    </Text>
+
+                    <TouchableOpacity
+                        mode="contained"
+                        style={[styles.button, styles.buttonHover]}
+                        labelStyle={styles.buttonText}
+                        onPress={() => props.navigation.navigate('WCameraPage')}
+                    >
+                        <Text style={styles.buttonText}>Start a new 4-cut!</Text>
+                    </TouchableOpacity>
+                 
+
+                    
+                </View>
+
+
+
             </View>
+            
 
-                <TouchableOpacity
-                    mode="contained"
-                    style={[styles.buttonMain, styles.buttonHover]}
-                    labelStyle={styles.buttonMainText}
-                    onPress={() => props.navigation.navigate('HowTo')}
-                >
-                    <Text style={styles.buttonMainText}>Start a new 4-cut!</Text>
-                </TouchableOpacity>
+                
 
 
                 <Text style={styles.header}>Available Frames</Text>

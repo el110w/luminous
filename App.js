@@ -16,6 +16,7 @@ import StateContext from './components/StateContext.js';
 
 // web components
 import WHome from './components/WHome.js';
+import WWebcam from './components/WWebcam.js';
 import WCameraPage from './components/WCameraPage.js';
 
 // iOS components
@@ -62,17 +63,13 @@ export default function App() {
             />
 
             <Stack.Screen  
-                name="CameraPage"
+                name="WCameraPage"
                 component={WCameraPage}
                 options={{
                     title: '247',
-                    headerTintColor: '#fff',
                     headerTitleStyle: { fontFamily: 'PlayfairItalic', 
-                        fontSize: 36, },
+                        fontSize: 52, },
                     headerBackTitleVisible: false,
-                    headerStyle: {
-                        backgroundColor: '#08090A',
-                    },
                     headerBackButtonMenuEnabled: false,
                     headerTitleAlign: 'center',
                 }}

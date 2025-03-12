@@ -6,8 +6,7 @@ export default StyleSheet.create({
      * SCREENS
      */
     screen: {
-        flex: 1,
-        //flex: 0.75,    //0 puts in center, 1 takes up all available space 
+        flex: 1, //0 puts in center, 1 takes up all available space 
         paddingTop: Constants.statusBarHeight,
         backgroundColor: '#fff',
         alignItems: 'center',
@@ -16,15 +15,14 @@ export default StyleSheet.create({
         // borderColor: 'red',
     },
     homeScreen: {
-        flex: 1,
-        //flex: 0.75,    //0 puts in center, 1 takes up all available space 
+        flex: 1, //0 puts in center, 1 takes up all available space 
         paddingTop: Constants.statusBarHeight,
         backgroundColor: '#fff',
-        //alignItems: 'center',
+        alignItems: 'center',
         justifyContent: 'flex-start',
-        width: '80%',
-        borderTopColor: "black",
-        borderWidth: 5,
+        width: '90%',
+        // borderTopColor: "black",
+        // borderWidth: 5,
     },
 
     /**
@@ -79,10 +77,19 @@ export default StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 4,
     },
+    webcamContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+
+    },
     textSection: {
-        paddingLeft: 10,
-        borderWidth: 2,
-        borderColor: 'green',
+        paddingLeft: 40,
+        flexWrap: 'wrap',
+        maxWidth: '40%',
+        height: 'auto',
+        // borderWidth: 2,
+        // borderColor: 'green',
+        
     },
 
 
@@ -121,6 +128,7 @@ export default StyleSheet.create({
         elevation: 5,
         backgroundColor: '#1E90FF',
         margin: 25,
+        width: 200,
         shadowColor: '#08090A',
         shadowOffset: {
             width: 0,
@@ -128,7 +136,7 @@ export default StyleSheet.create({
         },
         shadowOpacity: 0.2,
         shadowRadius: 6,
-        elevation: 5,
+        paddingLeft: 10,
     },
 
     buttonDisabled: {
@@ -155,8 +163,8 @@ export default StyleSheet.create({
         borderColor: '#08090A',
         borderWidth: 1,
         margin: 10,
-        width: 345,
-        height: 170,
+        width: 250,
+        height: 75,
         // shadowColor: '#08090A',
         // shadowOffset: {
         //     width: 0,
@@ -262,6 +270,7 @@ export default StyleSheet.create({
         marginRight: 20,
         marginBottom: 5,
         fontSize: 16,
+        flexShrink: 1,
     },
     infoHeader:{
         fontWeight:'bold',
