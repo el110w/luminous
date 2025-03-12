@@ -7,13 +7,13 @@ import {StatusBar} from 'expo-status-bar';
 import { Camera, CameraType } from 'expo-camera';
 import { NavigationContainer } from "@react-navigation/native";
 import ViewShot from 'react-native-view-shot';
-import styles from '../styles';
+import styles from '../styles.js';
 
 import StateContext from './StateContext.js';
 
 
 
-export default function DisplayImage({ route, navigation }){
+export default function MDisplayImage({ route, navigation }){
 
     const { picArray } = route.params;
 
@@ -112,7 +112,7 @@ export default function DisplayImage({ route, navigation }){
                     )
                 })}
 
-                <Image source={require('../assets/images/frame_00.png') }
+                <Image source={require('../assets/images/Mframe_00.png') }
                     style={{ width: 360, height: 540 }}
                     pointerEvents="none"
                 />

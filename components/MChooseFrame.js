@@ -9,19 +9,19 @@ import { NavigationContainer } from "@react-navigation/native";
 import ViewShot from 'react-native-view-shot'; //combine multiple photos into one
 import * as FileSystem from 'expo-file-system'; //download photo?
 import * as MediaLibrary from 'expo-media-library'; //trying to download to ios photos app
-import styles from '../styles';
+import styles from '../styles.js';
 
 import StateContext from './StateContext.js';
 
-import frame00 from '../assets/images/frame_00.png';
-import frame01 from '../assets/images/frame_01.png';
-import frame02 from '../assets/images/frame_02.png';
-import frame03 from '../assets/images/frame_03.png';
-import frame04 from '../assets/images/frame_04.png';
-import frame05 from '../assets/images/frame_05.png';
-import frame06 from '../assets/images/frame_06.png';
+import frame00 from '../assets/images/Mframe_00.png';
+import frame01 from '../assets/images/Mframe_01.png';
+import frame02 from '../assets/images/Mframe_02.png';
+import frame03 from '../assets/images/Mframe_03.png';
+import frame04 from '../assets/images/Mframe_04.png';
+import frame05 from '../assets/images/Mframe_05.png';
+import frame06 from '../assets/images/Mframe_06.png';
 
-export default function ChooseFrame({ route, navigation }){
+export default function MChooseFrame({ route, navigation }){
 
     const { fourImages } = route.params;
 

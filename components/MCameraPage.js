@@ -9,7 +9,7 @@ import {CameraView, Camera, CameraType, useCameraPermissions } from 'expo-camera
 console.log('camera================',Camera);
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from '../styles';
+import styles from '../styles.js';
 
 import StateContext from './StateContext.js';
 
@@ -21,7 +21,7 @@ import * as MediaLibrary from 'expo-media-library'; //trying to download to ios 
 let camera;
 
 
-export default function CameraPage(props){
+export default function MCameraPage(props){
 
     const [startCamera, setStartCamera] = useState(true);
     const [previewVisible, setPreviewVisible] = useState(false);

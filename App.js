@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, Image,
+import {Platform, StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, Image,
   SafeAreaView, View
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -13,12 +13,18 @@ import { useFonts } from 'expo-font';
 
 import styles from './styles';
 import StateContext from './components/StateContext.js';
-import Home from './components/Home.js';
-import CameraPage from './components/CameraPage';
-import HowTo from './components/HowTo.js';
-import DisplayImage from './components/DisplayImage.js';
-import ExploreLibrary from './components/ExploreLibrary.js';
-import ChooseFrame from './components/ChooseFrame.js';
+
+// web components
+import WHome from './components/WHome.js';
+import WCameraPage from './components/WCameraPage.js';
+
+// iOS components
+import MHome from './components/MHome.js';
+import MCameraPage from './components/MCameraPage.js';
+import MHowTo from './components/MHowTo.js';
+import MDisplayImage from './components/MDisplayImage.js';
+import MExploreLibrary from './components/MExploreLibrary.js';
+import MChooseFrame from './components/MChooseFrame.js';
 
 export default function App() {
 
@@ -33,6 +39,109 @@ export default function App() {
 
   const Stack = createNativeStackNavigator();
 
+  if (Platform.OS === 'web') {
+    return (
+        <NavigationContainer>
+        <StatusBar style="dark" />
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: {backgroundColor: '#fff'},
+            }}
+            initialRouteName="Home">
+
+            <Stack.Screen
+                name="Home"
+                component={WHome}
+                options={{
+                    title: '247', //sets header text so it doesn't have to be the name val
+                    headerTintColor: '#08090A',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic', 
+                        fontSize: 52, },
+                        headerTitleAlign: 'center',
+                }}
+            />
+
+            <Stack.Screen  
+                name="CameraPage"
+                component={WCameraPage}
+                options={{
+                    title: '247',
+                    headerTintColor: '#fff',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic', 
+                        fontSize: 36, },
+                    headerBackTitleVisible: false,
+                    headerStyle: {
+                        backgroundColor: '#08090A',
+                    },
+                    headerBackButtonMenuEnabled: false,
+                    headerTitleAlign: 'center',
+                }}
+            />
+
+            <Stack.Screen  
+                name="HowTo"
+                component={MHowTo}
+                options={{
+                    title: '247',
+                    headerTintColor: '#08090A',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic',
+                        fontSize: 36, },
+                    headerBackTitleVisible: false,
+                    headerTitleAlign: 'center',
+                }}
+            />
+
+            <Stack.Screen  
+                name="DisplayImage"
+                component={MDisplayImage}
+                options={{
+                    title: '247',
+                    headerTintColor: '#08090A',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic',
+                        fontSize: 36, },
+                    headerBackTitleVisible: false,
+                    headerBackVisible: true,
+                    gestureEnabled: false,
+                }}
+            />
+
+            <Stack.Screen  
+                name="ExploreLibrary"
+                component={MHowTo}
+                options={{
+                    title: '247',
+                    headerTintColor: '#08090A',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic',
+                        fontSize: 36, },
+                    headerBackTitleVisible: false,
+                }}
+            />
+
+            <Stack.Screen  
+                name="ChooseFrame"
+                component={MChooseFrame}
+                options={{
+                    title: '247',
+                    headerTintColor: '#08090A',
+                    headerTitleStyle: { fontFamily: 'PlayfairItalic',
+                        fontSize: 36, },
+                    headerBackTitleVisible: false,
+                    headerBackVisible: false,
+                    gestureEnabled: false,
+                    // headerRight: () => (
+                    //     <TouchableOpacity onPress={__savePhoto}>
+                    //     <Text style={ styles.headerNext }>Save</Text>
+                    //     </TouchableOpacity>
+                    // ),
+                }}
+            
+            />
+
+
+        </Stack.Navigator>
+    </NavigationContainer>
+    )
+  }
 
   return (
     <NavigationContainer>
@@ -45,7 +154,7 @@ export default function App() {
 
             <Stack.Screen
                 name="Home"
-                component={Home}
+                component={MHome}
                 options={{
                     title: '247', //sets header text so it doesn't have to be the name val
                     headerTintColor: '#08090A',
@@ -56,7 +165,7 @@ export default function App() {
 
             <Stack.Screen  
                 name="CameraPage"
-                component={CameraPage}
+                component={MCameraPage}
                 options={{
                     title: '247',
                     headerTintColor: '#fff',
@@ -72,7 +181,7 @@ export default function App() {
 
             <Stack.Screen  
                 name="HowTo"
-                component={HowTo}
+                component={MHowTo}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',
@@ -84,7 +193,7 @@ export default function App() {
 
             <Stack.Screen  
                 name="DisplayImage"
-                component={DisplayImage}
+                component={MDisplayImage}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',
@@ -98,7 +207,7 @@ export default function App() {
 
             <Stack.Screen  
                 name="ExploreLibrary"
-                component={HowTo}
+                component={MHowTo}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',
@@ -110,7 +219,7 @@ export default function App() {
 
             <Stack.Screen  
                 name="ChooseFrame"
-                component={ChooseFrame}
+                component={MChooseFrame}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',

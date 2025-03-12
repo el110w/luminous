@@ -6,23 +6,25 @@ import { Button } from 'react-native-paper';
 import {StatusBar} from 'expo-status-bar';
 import { Camera, CameraType } from 'expo-camera';
 import { NavigationContainer } from "@react-navigation/native";
-import styles from '../styles';
+import styles from '../styles.js';
 
 import StateContext from './StateContext.js';
 
-export default function ExploreLibrary(props){
+export default function MHowTo(props){
 
     return (
         <View style={styles.homeContainer}>
             <SafeAreaView  style={styles.homeScreen}>
-                <ScrollView>
+                <ScrollView style={styles.textSection}>
 
-                    <Text style={styles.pageTitle}>Welcome to Luminous!</Text>
+                    <Text style={styles.pageTitle}>Welcome to 247!</Text>
                     <View style={styles.textSpacer}></View>
+                    <Text style={styles.infoText}>This app is a photobooth you can use on the go. Here's how it works:</Text>
+
                     <Text style={styles.infoHeader}>1. Take your photos
                     </Text>
                     <Text style={styles.infoText}>Start the camera whenever you're ready! The camera will
-                        take 8 photos of you, each 8 seconds apart.
+                        take 6 photos of you, each 8 seconds apart.
                     </Text>
 
                     <Text style={styles.infoHeader}>2. Choose 4
@@ -39,7 +41,7 @@ export default function ExploreLibrary(props){
 
                     <Text style={styles.infoHeader}>5. Download
                     </Text>
-                    <Text style={styles.infoText}>Save to your camera roll!
+                    <Text style={styles.infoText}>Save to your camera roll! Don't worry, this app is database-less so your photos are private to you!
                     </Text>
                 </ScrollView>
 
