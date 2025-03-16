@@ -24,6 +24,16 @@ export default StyleSheet.create({
         // borderTopColor: "black",
         // borderWidth: 5,
     },
+    camereHomeScreen: {
+        flex: 1, //0 puts in center, 1 takes up all available space 
+        paddingTop: Constants.statusBarHeight,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '90%',
+        // borderTopColor: "black",
+        // borderWidth: 5,
+    },
 
     /**
      * CONTAINERS
@@ -48,12 +58,15 @@ export default StyleSheet.create({
     },
     cameraContainer: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#08090A',
-        padding: 20,
+        justifyContent: 'flex-start',
+        backgroundColor: '#000',
+        paddingTop: 20,
+        paddingBottom: 50,
         width: '100%',
-        height: '100%',
+        height: '100%', 
+        alignItems: 'center',
     },
+
     designContainer: {
         flexDirection: 'column',
         position: 'absolute',
@@ -80,12 +93,12 @@ export default StyleSheet.create({
     webcamContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-
+        justifyContent: 'center',
     },
     textSection: {
         paddingLeft: 40,
         flexWrap: 'wrap',
-        maxWidth: '40%',
+        maxWidth: 640,
         height: 'auto',
         // borderWidth: 2,
         // borderColor: 'green',
@@ -297,13 +310,14 @@ export default StyleSheet.create({
      */
     countdownOverlay: {
         position: 'absolute',
-        left: '85%',
-        // transform: [{ translateX: -50}, { translateY: -50 }],
+        top: -5,
+        right: 10,
+        //transform: [{ translateX: -50}, { translateY: -50 }],
         alignItems: 'center',
         justifyContent: 'center',
     },
     countdownText: {
-        fontSize: 50,
+        fontSize: 54,
         color: '#fff',
         fontWeight: 'bold',
         backgroundColor: 'rgba(0, 0, 0, 0.5',

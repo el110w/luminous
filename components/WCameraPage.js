@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, Image,
   SafeAreaView, View, ScrollView,
 } from 'react-native';
@@ -10,8 +10,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../wstyles.js';
 
 import StateContext from './StateContext.js';
-import WWebcam from './WWebcam.js';
+import WWebCamera from './WWebCamera.js';
 
+import * as ImageManipulator from 'expo-image-manipulator'; //used to flip image
 
 import frame00 from '../assets/images/Mframe_00.png';
 import frame01 from '../assets/images/Mframe_01.png';
@@ -21,7 +22,7 @@ import frame04 from '../assets/images/Mframe_04.png';
 import frame05 from '../assets/images/Mframe_05.png';
 import frame06 from '../assets/images/Mframe_06.png';
 
-export default function WHome(props){
+export default function WCameraPage(props){
 
     const frames = [
         { id: 0, src: frame00, title: "Frame 0" },
@@ -33,81 +34,202 @@ export default function WHome(props){
         { id: 6, src: frame01, title: "Frame 6" },
     ];
 
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [capturedImage, setCapturedImage] = useState(null);
+    const [picArray, setPicArray] = useState([]);
+    const [buttonPressed, setButtonPressed] = useState(false);
+    const [picPrev, setPicPrev] = useState(null);
+    const [countdown, setCountdown] = useState(0);
+    const [picsTaken, setPicsTaken] = useState(false);    
+
+    const [permission, requestPermission] = useCameraPermissions();
+    const webcamRef = useRef(null);
+
+    //check browser's camera permissions
+    if (!permission) {
+        return <Text>Requesting camera permission...</Text>;
+    }
+
+    if (!permission.granted) {
+        return (
+            <View>
+                <Text>Camera permission is required.</Text>
+                <Button onPress={requestPermission}>Grant Permission</Button>
+            </View>
+        );
+    }
 
 
+    /**
+     * taking multiple pics automatically, showing feedback photo's been taken, and adding pics to picArray
+     */
+    const __takeMultiplePictures = async () => {
+        setButtonPressed(true); //hides button so it can't be pressed again
+        setPicsTaken(false);
+        setPicArray([]);
+        const newPics = []; // Array to hold the new pictures
+        
+        console.log("Button has been pressed! Taking multiple photos now...");
+        //6 photos
+        for (let i = 0; i < 6; i++) {
+            
+            // Wait for 3 seconds before taking the next picture
+            setCountdown(8); // Change value depending on how long the timeout promise below is
+            const countdownInterval = setInterval(() => {
+                setCountdown((prev) => {
+                    if (prev === 1) {
+                        clearInterval(countdownInterval);
+                        return 0; // reset countdown
+                    }
+                    console.log("Seconds left until next picture taken:",prev-1);
+                    return prev - 1;
+                    
+                });
+                
+            }, 1000) // update the counter every 1 sec
+
+
+            
+            await new Promise((resolve) => {
+                setTimeout(async () => {
+                    if (webcamRef.current && webcamRef.current.captureFrame) {
+                        const imageSrc = await webcamRef.current.captureFrame();
+                        
+                        if (imageSrc) {
+                            try {
+                                const flippedImage = await ImageManipulator.manipulateAsync(
+                                    imageSrc, 
+                                    [{ flip: 'vertical' }], 
+                                    { compress: 1, format: ImageManipulator.SaveFormat.PNG }
+                                );
+                                newPics.push({ uri: imageSrc });
+                                // Update the picArray state with the new pictures
+                                setPicArray((prevPics) => [...prevPics, { uri: imageSrc }]);
+                                setPicPrev(imageSrc);
+                            } catch (error) {
+                                console.error("Error flipping image:",error);
+                            }
+                            
+                        }
+                        
+                    }
+                    resolve();
+                }, 9000);
+            })
+
+            console.log("Pictures taken:",i+1);
+            console.log("newPics length:",newPics.length);
+        }
     
+        
+    
+        // Show preview of the last captured image
+        setCapturedImage(newPics[newPics.length - 1]);
+        setPreviewVisible(true);
+        setPicsTaken(true);
+        console.log("Finished taking all photos:",picsTaken);
+        
+    };
+  
 
-
-
-
+    /**
+         * called when user chooses to retake photos
+         * clears previously taken photo, camera type is last used
+         * makes shutter button visible to be pressed again
+         */
+    const __retakePicture = () => {
+        setCapturedImage(null);
+        setPreviewVisible(false);
+        setButtonPressed(false);
+        setPicArray([]);
+        setPicsTaken(false);
+    }
 
 
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.homeContainer}>
+        <View style={styles.cameraContainer}>
             
-            <SafeAreaView  style={styles.homeScreen}>
+            <SafeAreaView  style={styles.cameraHomeScreen}>
 
-            <View style={styles.webcamContainer}>
+                <View style={styles.webcamContainer}>
+                    <View style={{ position: 'relative' }}>
+                        
+                        <WWebCamera ref={webcamRef} onCapture={(img) => console.log("Captured Image:",img)}/>
+                        
+                            {countdown > 0 && (
+                                <View style={styles.countdownOverlay}>
+                                    <Text style={styles.countdownText}>{countdown}</Text>
+                                </View>
+                            )}
 
-                <WWebcam/>
-        
-                
-                <View style={styles.textSection}>
-                    <Text style={styles.pageTitle}>Welcome!</Text>
-                    <View style={styles.textSpacer}></View>
-                    <Text style={styles.infoText}>This app is a photobooth you can use on the go. Here's how it works:</Text>
-                
-                    <Text style={styles.infoHeader}>1. Take your photos
-                    </Text>
-                    <Text style={styles.infoText}>Start the camera whenever you're ready! The camera will
-                    take 6 photos of you, each 8 seconds apart.
-                    </Text>
-                    
-                    <Text style={styles.infoHeader}>2. Choose 4
-                    </Text>
-                    <Text style={styles.infoText}>Select which pictures you want to use in a 2x2 photo frame. 
-                    </Text>
-                    
-                    <Text style={styles.infoHeader}>3. Personalize
-                    </Text>
-                    <Text style={styles.infoText}>Explore our collection of photobooth frames
-                        to decorate your photos with.
-                    </Text>
-                    
-                    <Text style={styles.infoHeader}>5. Download
-                    </Text>
-                    <Text style={styles.infoText}>Save to your camera roll! Don't worry, this app is database-less so your photos are private to you!
-                    </Text>
-
-                    <TouchableOpacity
-                        mode="contained"
-                        style={[styles.button, styles.buttonHover]}
-                        labelStyle={styles.buttonText}
-                        onPress={() => props.navigation.navigate('HowTo')}
-                    >
-                        <Text style={styles.buttonText}>Start a new 4-cut!</Text>
-                    </TouchableOpacity>
-                 
-
-                    
+                    </View>
                 </View>
-
-
-
-            </View>
-            
-
-                
-
-
-                
-                
             </SafeAreaView>
+
+            <TouchableOpacity
+                style={{
+                    width: 70,
+                    height: 70,
+                    borderWidth: 5,
+                    borderRadius: 50,
+                    marginTop: 10,
+                    borderColor: buttonPressed ? '#888888' : '#fff',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    padding: 5,
+                }}>
+                <TouchableOpacity
+                    onPress={__takeMultiplePictures}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
+                        backgroundColor: '#fff',
+                        display: buttonPressed ? 'none' : 'flex',
+                    }}
+                />
+            </TouchableOpacity>
             
         </View>
 
+
+
+<View style={{ width: '100%' }}>
+                    
+                    <ScrollView horizontal={true} style={styles.previewContainer}>   
+                        {picArray.map((item, index) => (
+                    
+                        <TouchableOpacity key={index}>
+                            <Image
+                                key={index}
+                                source={{ uri: item.uri }}
+                                style={{ width: 120,
+                                    height: 90,
+                                    margin: 10,
+                                    shadowColor: '#08090A',
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 1,
+                                    },
+                                    shadowOpacity: 0.2,
+                                    shadowRadius: 4,
+                                }}
+                            />
+                        </TouchableOpacity>
+                    ))}
+                    </ScrollView> 
+
+                </View>
+           
         </ScrollView>
-    )
+
+
+
+        
+
+
+
+    )    
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {StyleSheet, Text, TouchableOpacity, Alert, ImageBackground, Image,
-  SafeAreaView, View, ScrollView,
+  SafeAreaView, View, ScrollView, Dimensions,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import {StatusBar} from 'expo-status-bar';
@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../wstyles.js';
 
 import StateContext from './StateContext.js';
-import WWebcam from './WWebcam.js';
+import WWebCamera from './WWebCamera.js';
 
 
 import frame00 from '../assets/images/Mframe_00.png';
@@ -34,6 +34,8 @@ export default function WHome(props){
     ];
 
 
+    const screenWidth = Dimensions.get('window').width;
+    const isMobile = screenWidth < 768;
 
     
 
@@ -51,7 +53,7 @@ export default function WHome(props){
 
             <View style={styles.webcamContainer}>
 
-                <WWebcam/>
+                <WWebCamera/>
         
                 
                 <View style={styles.textSection}>
