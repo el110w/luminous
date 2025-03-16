@@ -27,7 +27,7 @@ export default StyleSheet.create({
     camereHomeScreen: {
         flex: 1, //0 puts in center, 1 takes up all available space 
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '90%',
@@ -59,7 +59,7 @@ export default StyleSheet.create({
     cameraContainer: {
         flex: 1,
         justifyContent: 'flex-start',
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         paddingTop: 20,
         paddingBottom: 50,
         width: '100%',
@@ -230,6 +230,12 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: 'semi-bold',
         color: '#000',
+    },
+    webcamButtons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
     },
 
     /**

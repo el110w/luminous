@@ -67,15 +67,11 @@ export default function App() {
                 component={WCameraPage}
                 options={{
                     title: '247',
-                    headerTintColor: '#fff',
                     headerTitleStyle: { fontFamily: 'PlayfairItalic', 
                         fontSize: 52, },
                     headerBackTitleVisible: false,
                     headerBackButtonMenuEnabled: false,
                     headerTitleAlign: 'center',
-                    headerStyle: {
-                        backgroundColor: '#08090A',
-                    },
                 }}
             />
 

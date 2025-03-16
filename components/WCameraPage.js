@@ -171,60 +171,107 @@ export default function WCameraPage(props){
                 </View>
             </SafeAreaView>
 
-            <TouchableOpacity
-                style={{
-                    width: 70,
-                    height: 70,
-                    borderWidth: 5,
-                    borderRadius: 50,
-                    marginTop: 10,
-                    borderColor: buttonPressed ? '#888888' : '#fff',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    padding: 5,
-                }}>
-                <TouchableOpacity
-                    onPress={__takeMultiplePictures}
+            <View style={styles.webcamButtons}>
+                {picsTaken ? (
+                    <TouchableOpacity
+                    onPress={__retakePicture}
                     style={{
-                        width: 50,
-                        height: 50,
+                        width: 130,
+                        height: 40,
+                        alignItems: 'center',
+                        borderRadius: 4,
+                        marginRight: 180,
+                    }}>
+                    <Text style={{ color: '#000', fontSize: 18, }}>
+                        Redo
+                    </Text>
+                    </TouchableOpacity> 
+                    ) : <View style={{ width: 130 }}/>}
+
+
+                <TouchableOpacity
+                    style={{
+                        width: 70,
+                        height: 70,
+                        borderWidth: 5,
                         borderRadius: 50,
-                        backgroundColor: '#fff',
-                        display: buttonPressed ? 'none' : 'flex',
-                    }}
-                />
-            </TouchableOpacity>
+                        marginTop: 10,
+                        borderColor: buttonPressed ? '#888888' : '#08090A',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        padding: 5,
+                    }}>
+                    <TouchableOpacity
+                        onPress={__takeMultiplePictures}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 50,
+                            backgroundColor: '#08090A',
+                            display: buttonPressed ? 'none' : 'flex',
+                        }}
+                    />
+                </TouchableOpacity>
+
+                        
+                {picsTaken ? (
+                    <TouchableOpacity
+                            onPress={() => props.navigation.replace(
+                                'DisplayImage', {picArray: picArray})}
+                            style={{
+                                width: 130,
+                                height: 40,
+                                alignItems: 'center',
+                                borderRadius: 4,
+                                marginLeft: 180,
+                        }}>
+                            <Text style={{ color: '#000', fontSize: 18 }}>
+                                Next
+                            </Text>
+                        </TouchableOpacity>
+                ) : <View style={{ width: 130 }}/>}
+            </View>
+            
+
+
+            <SafeAreaView>
+
+                <View style={{ width: '100%' }}>
+                        
+                        <ScrollView horizontal={true} style={styles.previewContainer}>   
+                            {picArray.map((item, index) => (
+                        
+                            <TouchableOpacity key={index}>
+                                <Image
+                                    key={index}
+                                    source={{ uri: item.uri }}
+                                    style={{ width: 120,
+                                        height: 90,
+                                        margin: 10,
+                                        shadowColor: '#08090A',
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 1,
+                                        },
+                                        shadowOpacity: 0.2,
+                                        shadowRadius: 4,
+                                    }}
+                                />
+                            </TouchableOpacity>
+                        ))}
+                        </ScrollView> 
+
+                    </View>
+
+            </SafeAreaView>
+
+            
             
         </View>
 
 
 
-<View style={{ width: '100%' }}>
-                    
-                    <ScrollView horizontal={true} style={styles.previewContainer}>   
-                        {picArray.map((item, index) => (
-                    
-                        <TouchableOpacity key={index}>
-                            <Image
-                                key={index}
-                                source={{ uri: item.uri }}
-                                style={{ width: 120,
-                                    height: 90,
-                                    margin: 10,
-                                    shadowColor: '#08090A',
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 1,
-                                    },
-                                    shadowOpacity: 0.2,
-                                    shadowRadius: 4,
-                                }}
-                            />
-                        </TouchableOpacity>
-                    ))}
-                    </ScrollView> 
-
-                </View>
+                
            
         </ScrollView>
 
