@@ -99,13 +99,16 @@ export default function WCameraPage(props){
                             try {
                                 const flippedImage = await ImageManipulator.manipulateAsync(
                                     imageSrc, 
-                                    [{ flip: 'vertical' }], 
+                                    [{ flip: 'horizontal' }], 
                                     { compress: 1, format: ImageManipulator.SaveFormat.PNG }
                                 );
-                                newPics.push({ uri: imageSrc });
+                                // const flippedImg = async () => {
+                                //     imageSrc.flip(FlipType.horizontal);
+                                // }
+                                newPics.push({ uri: flippedImage.uri });
                                 // Update the picArray state with the new pictures
-                                setPicArray((prevPics) => [...prevPics, { uri: imageSrc }]);
-                                setPicPrev(imageSrc);
+                                setPicArray((prevPics) => [...prevPics, { uri: flippedImage.uri }]);
+                                setPicPrev(flippedImage.uri);
                             } catch (error) {
                                 console.error("Error flipping image:",error);
                             }

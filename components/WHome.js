@@ -39,12 +39,6 @@ export default function WHome(props){
 
     
 
-
-
-
-
-
-
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <View style={styles.homeContainer}>
@@ -105,10 +99,10 @@ export default function WHome(props){
                 
 
 
-                <Text style={styles.header}>Available Frames</Text>
+                
 
-                <View style={{ width: '100%' }}>
-                    
+                <View style={{ width: '60%' }}>
+                    <Text style={styles.header}>Available Frames</Text>
                     <ScrollView horizontal={true} style={styles.previewContainer}>   
                         {frames.map((item, index) => (
                     

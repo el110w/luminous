@@ -59,7 +59,7 @@ const WebCamera = forwardRef((props, ref) => {
   return (
     <div>
       <video ref={videoRef} autoPlay playsInline style={{ 
-        width: '100%', height: 'auto', objectFit: 'contain',
+        width: '672', height: '445.5', objectFit: 'contain',
         transform: 'scaleX(-1)' }} />
       <canvas ref={canvasRef} style={{ display: 'none' }} /> {/* Hidden Canvas */}
     </div>
@@ -70,62 +70,3 @@ const WebCamera = forwardRef((props, ref) => {
 export default WebCamera;
 
 
-
-// export default function WebCamera({ onCapture }) {
-//   const [hasError, setHasError] = useState(false);
-//   const videoRef = useRef(null);
-//   const canvasRef = useRef(null); //used for capturing indiv frames
-
-//   useEffect(() => {
-//     const getWebCamera = async () => {
-//       try {
-//         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-//         if (videoRef.current) {
-//           videoRef.current.srcObject = stream;
-//         }
-//       } catch (err) {
-//         console.error('Error accessing webcam: ', err);
-//         setHasError(true);
-//       }
-//     };
-
-//     getWebCamera();
-
-//     return () => {
-//       if (videoRef.current) {
-//         const stream = videoRef.current.srcObject;
-//         const tracks = stream?.getTracks();
-//         tracks?.forEach(track => track.stop());
-//       }
-//     };
-//   }, []);
-
-
-//   const captureFrame = () => {
-//     if (videoRef.current && canvasRef.current) {
-//       const canvas = canvasRef.current;
-//       const context = canvas.getContext('2d');
-//       canvas.width = videoRef.current.videoWidth;
-//       canvas.height = videoRef.current.videoHeight;
-//       context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-//       const imageSrc = canvas.toDataURL('image/jpeg'); // Capture image as Base64
-//       console.log("WWebcam's image source:",imageSrc);
-//       onCapture(imageSrc); // Send image to parent component
-//     }
-//   };
-
-
-
-//   if (hasError) {
-//     return <p>Could not access webcam. Please make sure your camera is connected and try again.</p>;
-//   }
-
-//   return (
-//     <div>
-//       <video ref={videoRef} autoPlay playsInline style={{ 
-//         width: '100%', height: 'auto', objectFit: 'contain',
-//         transform: 'scaleX(-1)' }} />
-//       <canvas ref={canvasRef} style={{ display: 'none' }} /> {/* Hidden Canvas */}
-//     </div>
-//   );
-// }
