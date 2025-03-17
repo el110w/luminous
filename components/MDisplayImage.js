@@ -95,9 +95,8 @@ export default function MDisplayImage({ route, navigation }){
                     const posYTop = (index < 2) * (488 / 2) - 194; //- moves down, + moves up
 
                     return(
-                        <TouchableOpacity onPress={() => __curate(picArray.findIndex( item=> item.uri === uri))}>                        
+                        <TouchableOpacity key={index} onPress={() => __curate(picArray.findIndex( item=> item.uri === uri))}>                        
                             <Image
-                                key={index}
                                 source={{ uri }}
                                 style={{
                                     width: (picWidth/2.43),
@@ -112,7 +111,7 @@ export default function MDisplayImage({ route, navigation }){
                     )
                 })}
 
-                <Image source={require('../assets/images/Mframe_00.png') }
+                <Image source={require('../assets/images/MFrames/Mframe_00.png') }
                     style={{ width: 360, height: 540 }}
                     pointerEvents="none"
                 />

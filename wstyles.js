@@ -380,7 +380,7 @@ export default StyleSheet.create({
 
     headerNext: {
         fontSize: 16,
-        marginRight: 5,
+        marginRight: 500,
     }
 
 

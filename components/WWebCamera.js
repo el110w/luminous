@@ -8,7 +8,12 @@ const WebCamera = forwardRef((props, ref) => {
   useEffect(() => {
     const getWebCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true});
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: {
+            width: { ideal: 672 },
+            height: { ideal: 445 },
+          }
+        });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
@@ -58,9 +63,14 @@ const WebCamera = forwardRef((props, ref) => {
 
   return (
     <div>
-      <video ref={videoRef} autoPlay playsInline style={{ 
-        width: '672', height: '445.5', objectFit: 'contain',
-        transform: 'scaleX(-1)' }} />
+      <video ref={videoRef} autoPlay playsInline 
+        style={{ 
+          width: '100%', 
+          height: 'auto', 
+          objectFit: 'contain',
+          transform: 'scaleX(-1)'
+        }} 
+      />
       <canvas ref={canvasRef} style={{ display: 'none' }} /> {/* Hidden Canvas */}
     </div>
   );

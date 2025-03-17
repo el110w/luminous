@@ -16,8 +16,10 @@ import StateContext from './components/StateContext.js';
 
 // web components
 import WHome from './components/WHome.js';
-import WWebcam from './components/WWebCamera.js';
+import WWebCamera from './components/WWebCamera.js';
 import WCameraPage from './components/WCameraPage.js';
+import WDisplayImage from './components/WDisplayImage.js';
+import WChooseFrame from './components/WChooseFrame.js';
 
 // iOS components
 import MHome from './components/MHome.js';
@@ -58,7 +60,7 @@ export default function App() {
                     headerTintColor: '#08090A',
                     headerTitleStyle: { fontFamily: 'PlayfairItalic', 
                         fontSize: 52, },
-                        headerTitleAlign: 'center',
+                    headerTitleAlign: 'center',
                 }}
             />
 
@@ -76,21 +78,8 @@ export default function App() {
             />
 
             <Stack.Screen  
-                name="HowTo"
-                component={MHowTo}
-                options={{
-                    title: '247',
-                    headerTintColor: '#08090A',
-                    headerTitleStyle: { fontFamily: 'PlayfairItalic',
-                        fontSize: 36, },
-                    headerBackTitleVisible: false,
-                    headerTitleAlign: 'center',
-                }}
-            />
-
-            <Stack.Screen  
-                name="DisplayImage"
-                component={MDisplayImage}
+                name="WDisplayImage"
+                component={WDisplayImage}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',
@@ -99,6 +88,7 @@ export default function App() {
                     headerBackTitleVisible: false,
                     headerBackVisible: true,
                     gestureEnabled: false,
+                    headerTitleAlign: 'center',
                 }}
             />
 
@@ -115,8 +105,8 @@ export default function App() {
             />
 
             <Stack.Screen  
-                name="ChooseFrame"
-                component={MChooseFrame}
+                name="WChooseFrame"
+                component={WChooseFrame}
                 options={{
                     title: '247',
                     headerTintColor: '#08090A',

@@ -21,7 +21,7 @@ import frame04 from '../assets/images/MFrames/Mframe_04.png';
 import frame05 from '../assets/images/MFrames/Mframe_05.png';
 import frame06 from '../assets/images/MFrames/Mframe_06.png';
 
-export default function MChooseFrame({ route, navigation }){
+export default function WChooseFrame({ route, navigation }){
 
     const { fourImages } = route.params;
 

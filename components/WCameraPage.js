@@ -14,25 +14,8 @@ import WWebCamera from './WWebCamera.js';
 
 import * as ImageManipulator from 'expo-image-manipulator'; //used to flip image
 
-import frame00 from '../assets/images/Mframe_00.png';
-import frame01 from '../assets/images/Mframe_01.png';
-import frame02 from '../assets/images/Mframe_02.png';
-import frame03 from '../assets/images/Mframe_03.png';
-import frame04 from '../assets/images/Mframe_04.png';
-import frame05 from '../assets/images/Mframe_05.png';
-import frame06 from '../assets/images/Mframe_06.png';
 
 export default function WCameraPage(props){
-
-    const frames = [
-        { id: 0, src: frame00, title: "Frame 0" },
-        { id: 1, src: frame06, title: "Frame 1" },
-        { id: 2, src: frame05, title: "Frame 2" },
-        { id: 3, src: frame04, title: "Frame 3" },
-        { id: 4, src: frame03, title: "Frame 4" },
-        { id: 5, src: frame02, title: "Frame 5" },
-        { id: 6, src: frame01, title: "Frame 6" },
-    ];
 
     const [previewVisible, setPreviewVisible] = useState(false);
     const [capturedImage, setCapturedImage] = useState(null);
@@ -73,8 +56,8 @@ export default function WCameraPage(props){
         //6 photos
         for (let i = 0; i < 6; i++) {
             
-            // Wait for 3 seconds before taking the next picture
-            setCountdown(8); // Change value depending on how long the timeout promise below is
+            // Wait for 8 seconds before taking the next picture
+            setCountdown(2); // Change value depending on how long the timeout promise below is
             const countdownInterval = setInterval(() => {
                 setCountdown((prev) => {
                     if (prev === 1) {
@@ -117,7 +100,7 @@ export default function WCameraPage(props){
                         
                     }
                     resolve();
-                }, 9000);
+                }, 3000);
             })
 
             console.log("Pictures taken:",i+1);
@@ -217,7 +200,7 @@ export default function WCameraPage(props){
                 {picsTaken ? (
                     <TouchableOpacity
                             onPress={() => props.navigation.replace(
-                                'DisplayImage', {picArray: picArray})}
+                                'WDisplayImage', {picArray: picArray})}
                             style={{
                                 width: 130,
                                 height: 40,
@@ -234,36 +217,35 @@ export default function WCameraPage(props){
             
 
 
-            <SafeAreaView>
 
-                <View style={{ width: '100%' }}>
+
+                <View style={{ width: '700px', marginTop: 20, }}>
                         
-                        <ScrollView horizontal={true} style={styles.previewContainer}>   
-                            {picArray.map((item, index) => (
+                    <ScrollView horizontal={true} style={styles.previewContainer}>   
+                        {picArray.map((item, index) => (
                         
-                            <TouchableOpacity key={index}>
-                                <Image
-                                    key={index}
-                                    source={{ uri: item.uri }}
-                                    style={{ width: 120,
-                                        height: 90,
-                                        margin: 10,
-                                        shadowColor: '#08090A',
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 1,
-                                        },
-                                        shadowOpacity: 0.2,
-                                        shadowRadius: 4,
-                                    }}
-                                />
-                            </TouchableOpacity>
-                        ))}
-                        </ScrollView> 
+                        <TouchableOpacity key={index}>
+                            <Image
+                                key={index}
+                                source={{ uri: item.uri }}
+                                style={{ width: 168,
+                                    height: 111,
+                                    margin: 5,
+                                    shadowColor: '#08090A',
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 1,
+                                    },
+                                    shadowOpacity: 0.2,
+                                    shadowRadius: 4,
+                                }}
+                            />
+                        </TouchableOpacity>
+                    ))}
+                    </ScrollView> 
 
-                    </View>
+                </View>
 
-            </SafeAreaView>
 
             
             

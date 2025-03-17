@@ -11,13 +11,13 @@ import styles from '../styles.js';
 
 import StateContext from './StateContext.js';
 
-import frame00 from '../assets/images/Mframe_00.png';
-import frame01 from '../assets/images/Mframe_01.png';
-import frame02 from '../assets/images/Mframe_02.png';
-import frame03 from '../assets/images/Mframe_03.png';
-import frame04 from '../assets/images/Mframe_04.png';
-import frame05 from '../assets/images/Mframe_05.png';
-import frame06 from '../assets/images/Mframe_06.png';
+import frame00 from '../assets/images/MFrames/Mframe_00.png';
+import frame01 from '../assets/images/MFrames/Mframe_01.png';
+import frame02 from '../assets/images/MFrames/Mframe_02.png';
+import frame03 from '../assets/images/MFrames/Mframe_03.png';
+import frame04 from '../assets/images/MFrames/Mframe_04.png';
+import frame05 from '../assets/images/MFrames/Mframe_05.png';
+import frame06 from '../assets/images/MFrames/Mframe_06.png';
 
 export default function MHome(props){
 
